@@ -19,7 +19,10 @@ class CreatePostsTable extends Migration
             $table->string('body', 140);
             $table->timestamps();
 
-            //Foreign key - sets relationship/when user is deleted, so will the users posts(cascade)
+            /**
+            * Foreign key - sets relationship/when user is deleted, so will the users posts(cascade)
+            */
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
