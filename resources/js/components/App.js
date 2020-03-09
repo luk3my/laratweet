@@ -20,7 +20,7 @@ class App extends Component {
     }
 
     postData() {
-        //Ajax request
+        //Ajax request//
         axios.post('/posts', {
             body: this.state.body
         })
