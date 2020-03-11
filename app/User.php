@@ -28,8 +28,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['avatar'];
+
     public function posts() {
         return $this->hasMany(Post::class);
+    }
+
+    public function getAvatar() {
+        return 'https://gravatar.com/avatar/' .md5($this->email). '/?s=45&d=mm';
+    }
+
+    //Access method
+    public function getAvatarAttribute() {
+        return $this->getAvatar();
     }
 
     /**

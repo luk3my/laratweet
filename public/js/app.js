@@ -65678,6 +65678,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -65707,7 +65715,8 @@ var App = /*#__PURE__*/function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
-      body: ''
+      body: '',
+      posts: []
     }; //bind
 
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -65718,13 +65727,28 @@ var App = /*#__PURE__*/function (_Component) {
   _createClass(App, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      this.postData();
-      console.log('posted');
+      var _this2 = this;
+
+      e.preventDefault(); // this.postData();
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/posts', {
+        body: this.state.body
+      }).then(function (response) {
+        // console.log(response);
+        _this2.setState({
+          posts: [].concat(_toConsumableArray(_this2.state.posts), [response.data]),
+          body: ''
+        });
+      }); //clear input
+
+      this.setState({
+        body: ''
+      });
     }
   }, {
     key: "postData",
     value: function postData() {
+      //Ajax request//
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/posts', {
         body: this.state.body
       });
@@ -65757,6 +65781,7 @@ var App = /*#__PURE__*/function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         onChange: this.handleChange,
+        value: this.state.body,
         className: "form-control",
         rows: "5",
         maxLength: "140",
@@ -65772,9 +65797,19 @@ var App = /*#__PURE__*/function (_Component) {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, "Example Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Recent Posts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, "I'm an example component!")))));
+      }, this.state.posts.map(function (post) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: post.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: post.user.avatar
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "user"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "#"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, post.user.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post.body));
+      }))))));
     }
   }]);
 
