@@ -16,7 +16,7 @@ class App extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // this.postData();
+
         axios.post('/posts', {
             body: this.state.body
         }).then(response => {
@@ -26,6 +26,7 @@ class App extends Component {
                 body: ''
             })
         });
+        console.log(this.state.posts);
         //clear input
         this.setState({
             body: ''
@@ -78,12 +79,10 @@ class App extends Component {
                                 {this.state.posts.map(post => (
                                     <div key={post.id}>
                                         <img src={post.user.avatar} />
-                                            <div className="user">
-                                                <a href="#">
-                                                    <b>{post.user.username}</b>
+                                                <a href={`/users/${post.user.username}`}>
+                                                    <b style={{textTransform: 'capitalize', marginLeft: '5px'}}>{post.user.username}</b>
                                                 </a>
-                                            </div>
-                                            <p>{post.body}</p> 
+                                            <p>{post.body}</p><hr />
                                     </div>
                                 ))}
                             </div>

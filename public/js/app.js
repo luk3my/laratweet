@@ -65729,8 +65729,7 @@ var App = /*#__PURE__*/function (_Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault(); // this.postData();
-
+      e.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/posts', {
         body: this.state.body
       }).then(function (response) {
@@ -65739,7 +65738,8 @@ var App = /*#__PURE__*/function (_Component) {
           posts: [].concat(_toConsumableArray(_this2.state.posts), [response.data]),
           body: ''
         });
-      }); //clear input
+      });
+      console.log(this.state.posts); //clear input
 
       this.setState({
         body: ''
@@ -65804,11 +65804,14 @@ var App = /*#__PURE__*/function (_Component) {
           key: post.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: post.user.avatar
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "user"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "#"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, post.user.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post.body));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/users/".concat(post.user.username)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+          style: {
+            textTransform: 'capitalize',
+            marginLeft: '5px'
+          }
+        }, post.user.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, post.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
       }))))));
     }
   }]);
@@ -65862,8 +65865,8 @@ if (document.getElementById('example')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/luke/Documents/laravel_projects/laratweet/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/luke/Documents/laravel_projects/laratweet/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\laratweet\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\laratweet\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

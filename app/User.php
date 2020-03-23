@@ -43,6 +43,10 @@ class User extends Authenticatable
         return $this->getAvatar();
     }
 
+    public function getRouteKeyName() {
+        return 'username';
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
